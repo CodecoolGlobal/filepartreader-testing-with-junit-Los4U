@@ -1,13 +1,17 @@
 import java.io.File;
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         String path = "C:\\Users\\Kamil Woś\\IdeaProjects\\filepartreader-testing-with-junit-Los4U\\resources\\test.txt";
 
         FilePartReader fpReader =  new FilePartReader();
-        System.out.println(fpReader.readLines());
+
+        try{
+            System.out.println(fpReader.readLines());
+        }catch (Exception e){e.printStackTrace();}
 
         System.out.println("------------------------------------------------------");
 
