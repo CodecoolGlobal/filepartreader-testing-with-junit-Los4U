@@ -1,25 +1,24 @@
+import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileWordAnalyzer {
-    FilePartReader filePartReader;
+class FileWordAnalyzer {
+    private FilePartReader filePartReader;
 
-    public FileWordAnalyzer(FilePartReader filePartReader) {
+    FileWordAnalyzer(FilePartReader filePartReader) {
         this.filePartReader = filePartReader;
     }
 
-    public List getWordsOrderedAlphabetically (){
+    List getWordsOrderedAlphabetically () throws IOException {
         String allLines  = filePartReader.readLines();
-
-        List myList =  getTheWordsList(allLines);
-
-        return myList;
+        return getTheWordsList(allLines);
     }
 
-    public List getWordsContainingSubstring (String subString ){
+    List getWordsContainingSubstring (String subString ) throws IOException {
         String allLines  = filePartReader.readLines();
         List myList =  getTheWordsList(allLines);
         List listThatContainsSubString = new ArrayList<String>();
@@ -32,7 +31,7 @@ public class FileWordAnalyzer {
         return listThatContainsSubString;
     }
 
-    public List getStringsWhichPalindromes (){
+    List getStringsWhichPalindromes () throws IOException{
         String allLines  = filePartReader.readLines();
 
         List myList =  getTheWordsList(allLines);
@@ -46,11 +45,11 @@ public class FileWordAnalyzer {
         return palindromes;
     }
 
-    public static boolean isPalindrome(String str) {
+    boolean isPalindrome(String str) {
         return (str.toLowerCase()).equals(new StringBuilder(str.toLowerCase()).reverse().toString());
     }
 
-    public List getTheWordsList(String allLines){
+    private List getTheWordsList(String allLines){
         String lines = allLines.replace("\n", " ").replace("\r", " ");
         ArrayList<String> myList = new ArrayList<>(Arrays.asList(lines.split(" ")));
         Collections.sort(myList);
